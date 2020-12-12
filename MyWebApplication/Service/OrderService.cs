@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Models;
 using MyWebApplication.Service.Interface;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,12 @@ namespace MyWebApplication.Service
             _context = context;
         }
 
+        public async Task<List<Order>> RetrieveOrder(string customerId) 
+        {
+            var orders = await _context.Orders.Where(x=>x.CustomerId == customerId).ToListAsync();
+            return orders;
+        }
 
-        
+
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyWebApplication.Models;
+using MyWebApplication.Service;
 
 namespace MyWebApplication
 {
@@ -29,7 +30,7 @@ namespace MyWebApplication
         {
             services.AddDbContext<mytestdatabase12Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), providerOptions => providerOptions.CommandTimeout(600)), ServiceLifetime.Transient);
 
-
+            services.AddOtherServices();
             services.AddControllers();
         }
 

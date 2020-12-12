@@ -21,7 +21,13 @@ namespace MyWebApplication.Controllers
             _orderService = orderService;
         }
 
-        
+        [HttpGet]
+        [Route("RetrieveOrder")]
+        public async Task<ApiResultModel> RetrieveOrder(string customerid)
+        {
+            var order = await _orderService.RetrieveOrder(customerid);
+            return ResultHandler.GetResultModel(order);
+        }
 
 
     }

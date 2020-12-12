@@ -8,6 +8,6 @@ namespace MyWebApplication.Service.Interface
 {
     public interface IOrderService
     {
-        
+        Task<List<Order>> RetrieveOrder(string customerId);
     }
 }
