@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApplication.Models;
+using MyWebApplication.Models.ApiOutputModel;
+using MyWebApplication.Models.DTOs;
 using MyWebApplication.Service;
 using MyWebApplication.Service.Interface;
 
@@ -25,8 +27,12 @@ namespace MyWebApplication.Controllers
         [Route("RetrieveOrder")]
         public async Task<ApiResultModel> RetrieveOrder(string customerid)
         {
-            var order = await _orderService.RetrieveOrder(customerid);
-            return ResultHandler.GetResultModel(order);
+            List<OrderDTO> orders = await _orderService.RetrieveOrder(customerid);
+            RetrieveOrderApiOutputModel result = new RetrieveOrderApiOutputModel()
+            {
+                OrderInfoList = orders
+            };
+            return ResultHandler.GetResultModel(result);
         }
 
 

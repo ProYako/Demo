@@ -39,16 +39,42 @@ namespace MyWebApplicationTest
             //dbContext.AddRange(order01, order02, order03);
         }
 
-        public Order CreateDbOrder(int orderId, string customerId, DateTime orderDate)
+        public Order CreateDbOrder(int orderId, string customerId, int employeeId, DateTime orderDate)
         {
             Order order = new Order
             {
                 OrderId = orderId,
                 CustomerId = customerId,
+                EmployeeId = employeeId,
                 OrderDate = orderDate
             };
 
             return order;
+        }
+
+        public OrderDetail CreateDbOrderDetail(int orderId, int productId, decimal unitPrice, short quantity, float discount)
+        {
+            OrderDetail orderDetail = new OrderDetail
+            {
+                OrderId = orderId,
+                ProductId = productId,
+                UnitPrice = unitPrice,
+                Quantity = quantity,
+                Discount = discount
+            };
+
+            return orderDetail;
+        }
+
+        public Product CreateDbProduct(int productId, string productName)
+        {
+            Product product = new Product
+            {
+                ProductId = productId,
+                ProductName = productName
+            };
+
+            return product;
         }
     }
 }

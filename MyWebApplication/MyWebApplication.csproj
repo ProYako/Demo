@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\ApiInputModel\" />
-    <Folder Include="Service\ApiOutputModel\" />
+    <Folder Include="Models\ApiInputModel\" />
   </ItemGroup>
 
 
