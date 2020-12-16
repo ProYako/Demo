@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApplication.Models;
+using MyWebApplication.Models.ApiInputModel;
 using MyWebApplication.Models.ApiOutputModel;
 using MyWebApplication.Models.DTOs;
 using MyWebApplication.Service;
@@ -35,6 +36,13 @@ namespace MyWebApplication.Controllers
             return ResultHandler.GetResultModel(result);
         }
 
-
+        [HttpPost]
+        [Route("CreateOrder")]
+        public async Task<ApiResultModel> CreateOrder(CreateOrderApiInputModel model)
+        {
+            int orderId = await _orderService.CreateOrder(model);
+            
+            return ResultHandler.GetResultModel(orderId);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Models;
+using MyWebApplication.Models.ApiInputModel;
 using MyWebApplication.Models.ApiOutputModel;
 using MyWebApplication.Models.DTOs;
 using MyWebApplication.Service.Interface;
@@ -57,6 +58,33 @@ namespace MyWebApplication.Service
             return orderInfoResults;
         }
 
+
+        /// <summary>
+        /// 建立新訂單,取得訂單號碼
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<int> CreateOrder(CreateOrderApiInputModel model)
+        {
+            //var orders = await _context.Orders.Where(x=>x.CustomerId == customerId).ToListAsync();
+
+            Order order = new Order()
+            {
+                //OrderId = 11079,
+                CustomerId = model.CustomerId,
+                EmployeeId = model.EmployeeId,
+                OrderDate = model.OrderDate,
+                Freight = model.Freight
+            };
+
+            var orderEntity = _context.Orders.Add(order);
+
+            await _context.SaveChangesAsync();
+            var orderId = orderEntity.Entity.OrderId;
+
+
+            return orderId;
+        }
 
     }
 }
