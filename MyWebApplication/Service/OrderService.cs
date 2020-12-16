@@ -108,7 +108,7 @@ namespace MyWebApplication.Service
         {
             OrderDTO orderDTO = new OrderDTO();
             var order = await _context.Orders.FindAsync(model.OrderId);
-            var orderDetails = await _context.OrderDetails.Where(x => x.OrderId == model.OrderId).AsNoTracking().ToListAsync();
+            var orderDetails = await _context.OrderDetails.Where(x => x.OrderId == model.OrderId).ToListAsync();
             List<OrderDetailDTO> orderDetailDTOs = new List<OrderDetailDTO>();
             foreach (var orderDetail in orderDetails) 
             {
