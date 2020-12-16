@@ -11,5 +11,6 @@ namespace MyWebApplication.Service.Interface
         Task<int> CreateOrder(CreateOrderApiInputModel model);
 
         Task<int> UpdateOrder(UpdateOrderApiInputModel model);
+        Task<OrderDTO> DeleteOrder(DeleteOrderApiInputModel model);
     }
 }

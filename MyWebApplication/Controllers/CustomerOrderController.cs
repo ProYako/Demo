@@ -53,5 +53,14 @@ namespace MyWebApplication.Controllers
 
             return ResultHandler.GetResultModel(orderId);
         }
+
+        [HttpPost]
+        [Route("DeleteOrder")]
+        public async Task<ApiResultModel> DeleteOrder(DeleteOrderApiInputModel model)
+        {
+            var orderInfo = await _orderService.DeleteOrder(model);
+
+            return ResultHandler.GetResultModel(orderInfo);
+        }
     }
 }

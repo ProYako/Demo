@@ -103,5 +103,40 @@ namespace MyWebApplication.Service
 
             return orderId;
         }
+
+        public async Task<OrderDTO> DeleteOrder(DeleteOrderApiInputModel model)
+        {
+            OrderDTO orderDTO = new OrderDTO();
+            var order = await _context.Orders.FindAsync(model.OrderId);
+            var orderDetails = await _context.OrderDetails.Where(x => x.OrderId == model.OrderId).AsNoTracking().ToListAsync();
+            List<OrderDetailDTO> orderDetailDTOs = new List<OrderDetailDTO>();
+            foreach (var orderDetail in orderDetails) 
+            {
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
+                {
+                    ProductId = orderDetail.ProductId,
+                    UnitPrice = orderDetail.UnitPrice,
+                    Quantity = orderDetail.Quantity,
+                    Discount = orderDetail.Discount
+                };
+                orderDetailDTOs.Add(orderDetailDTO);
+                var orderailDeEntity = _context.OrderDetails.Remove(orderDetail);
+            }
+
+            var orderEntity = _context.Orders.Remove(order);
+
+            await _context.SaveChangesAsync();
+            var orderId = orderEntity.Entity.OrderId;
+            orderDTO = new OrderDTO()
+            {
+                OrderId = orderId,
+                CustomerId = order.CustomerId,
+                EmployeeId = order.EmployeeId,
+                OrderDate = order.OrderDate,
+                OrderDetailList = orderDetailDTOs
+            };
+
+            return orderDTO;
+        }
     }
 }
