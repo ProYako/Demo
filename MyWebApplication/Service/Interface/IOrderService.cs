@@ -9,5 +9,7 @@ namespace MyWebApplication.Service.Interface
     {
         Task<List<OrderDTO>> RetrieveOrder(string customerId);
         Task<int> CreateOrder(CreateOrderApiInputModel model);
+
+        Task<int> UpdateOrder(UpdateOrderApiInputModel model);
     }
 }

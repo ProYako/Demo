@@ -44,5 +44,14 @@ namespace MyWebApplication.Controllers
             
             return ResultHandler.GetResultModel(orderId);
         }
+
+        [HttpPost]
+        [Route("UpdateOrder")]
+        public async Task<ApiResultModel> UpdateOrder(UpdateOrderApiInputModel model)
+        {
+            int orderId = await _orderService.UpdateOrder(model);
+
+            return ResultHandler.GetResultModel(orderId);
+        }
     }
 }

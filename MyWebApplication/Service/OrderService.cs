@@ -86,5 +86,22 @@ namespace MyWebApplication.Service
             return orderId;
         }
 
+        public async Task<int> UpdateOrder(UpdateOrderApiInputModel model)
+        {
+            var order = await _context.Orders.FindAsync(model.OrderId);
+
+            order.CustomerId = model.CustomerId;
+            order.EmployeeId = model.EmployeeId;
+            order.OrderDate = model.OrderDate;
+            order.Freight = model.Freight;
+
+            var orderEntity = _context.Orders.Update(order);
+
+            await _context.SaveChangesAsync();
+            var orderId = orderEntity.Entity.OrderId;
+
+
+            return orderId;
+        }
     }
 }
